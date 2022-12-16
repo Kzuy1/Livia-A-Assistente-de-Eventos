@@ -1,10 +1,17 @@
 const Discord = require("discord.js")
 
 module.exports = {
-  name: "ping", // Coloque o nome do comando
-  description: "Veja o ping do bot.", // Coloque a descrição do comando
+  name: "event_create",
   type: Discord.ApplicationCommandType.ChatInput,
-
+  description: "Cria um evento",
+  options: [
+    {
+      name: "data",
+      type: Discord.ApplicationCommandOptionType.String,
+      description: "Cria um evento",
+    }
+  ],
+  
   run: async (client, interaction) => {
 
     let ping = client.ws.ping;
@@ -19,7 +26,7 @@ module.exports = {
     .setDescription(`Olá ${interaction.user}, meu ping está em \`${ping}ms\`.`)
     .setColor("Random");
 
-    interaction.reply({ embeds: [embed_1] }).then( () => {
+    interaction.reply({ embeds: [embed_1], ephemeral: true  }).then( () => {
         setTimeout( () => {
             interaction.editReply({ embeds: [embed_2] })
         }, 2000)
